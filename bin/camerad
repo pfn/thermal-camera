@@ -1,0 +1,29 @@
+#!/bin/bash
+
+THERMAL_CAMERA_HOME=/home/pi/src/thermal-imaging
+trap "cleanup" SIGINT SIGTERM
+trap "goodbye" EXIT
+
+function cleanup() {
+	local pids=$(jobs -pr)
+	[ -n "$pids" ] && kill $pids
+	exit 0
+}
+
+function goodbye() {
+	echo
+	echo "GTFO"
+	echo
+}
+
+function camera() {
+	while true; do
+			$THERMAL_CAMERA_HOME/bin/thermal-camera.py &
+		exec_pid=$!
+		wait ${exec_pid}
+		echo "Camera exited, restarting"
+	done
+}
+
+camera &
+

@@ -1,0 +1,11 @@
+[Unit]
+Descriptio=Thermal Camera service
+
+[Service]
+WorkingDirectory=/home/pi/src/uMTP-Responder/conf
+ExecStart=/home/pi/src/uMTP-Responder/conf/umtprd_gfs.sh
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Descriptio=Thermal Camera service
+
+[Service]
+WorkingDirectory=/home/pi/src/thermal-imaging
+ExecStart=/home/pi/src/thermal-imaging/bin/camerad
+Restart=always
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
